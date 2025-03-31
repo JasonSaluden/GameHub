@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+
+<h1>Liste des jeux vidéo</h1>
+
+<div class="container">
+    <div class="row">
+        {% for game in games %}
+            <div class="col-md-4 mb-4">
+                <div class="game-item">
+                    <img src="{{ asset('images/' ~ game.imageFileName) }}" alt="{{ game.name }}" class="game-image img-fluid" />
+                    <h3>{{ game.name }}</h3>
+                    <p>{{ game.genre }}</p>
+                </div>
+            </div>
+        {% else %}
+            <p>Aucun jeu trouvé.</p>
+        {% endfor %}
+    </div>
+</div>
+
+
+<p>
+    <a href="{{ path('app_video_game_add') }}">Ajouter un jeu à la liste</a>
+</p>
+
+
+{% endblock %}
