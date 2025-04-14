@@ -1,3 +1,13 @@
 body {
-    background-color: skyblue;
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #fff;
+}
+
+
+
+
+
+.display-3 {
+    text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff;
 }

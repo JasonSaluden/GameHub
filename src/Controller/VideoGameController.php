@@ -27,9 +27,8 @@ final class VideoGameController extends AbstractController
     public function add(Request $request, EntityManagerInterface $entityManager): Response 
     {
 
-        if ($this->getUser()) {
-            $username = $this->getUser()->getEmail();
-            return $this->render('default/index.html.twig', ['username => $username']);
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
         }
         
         $game = new Game();
@@ -37,12 +36,22 @@ final class VideoGameController extends AbstractController
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('imageFile')->getData();
+            
+            if($image) {
+                $newFilename = uniqid() . '.' . $image->guessExtension();
+                $image->move(
+                    $this->getParameter('images_directory'), 
+                    $newFilename
+                );
+                
+                $game->setImageFileName($newFilename);
+            }
+            
             $entityManager->persist($game);
             $entityManager->flush();
 
-            // Message de validation
             $this->addFlash('success', 'Le jeu a bien été créé !');
-            // redirection vers liste de jeux
             return $this->redirectToRoute('app_video_game');
         }
         return $this->render('video_game/add.html.twig', [

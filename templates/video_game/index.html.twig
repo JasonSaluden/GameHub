@@ -1,19 +1,30 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Liste des jeux - GameHubPro{% endblock %}
 
 {% block body %}
-
-
-<h1>Liste des jeux vidéo</h1>
-
-<div class="container">
-    <div class="row">
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="m-0">Tous les jeux</h1>
+        <a href="{{ path('app_video_game_add') }}" class="btn btn-success">
+            + Ajouter un jeu
+        </a>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
         {% for game in games %}
-            <div class="col-md-4 mb-4">
-                <div class="game-item">
-                    <img src="{{ asset('images/' ~ game.imageFileName) }}" alt="{{ game.name }}" class="game-image img-fluid" />
-                    <h3>{{ game.name }}</h3>
-                    <p>{{ game.genre }}</p>
+            <div class="col">
+                <div class="card h-100 game-card position-relative overflow-hidden">
+                    <img src="{{ asset('images/' ~ game.imageFileName) }}" class="card-img-top" alt="{{ game.name }}">
+
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ game.name }}</h5>
+                    </div>
+
+                    <div class="game-overlay position-absolute top-0 start-0 w-100 h-100 p-3 d-flex flex-column justify-content-center align-items-center text-white text-center">
+                        <p><strong>Genre :</strong> {{ game.genre }}</p>
+                        <p><strong>Plateforme :</strong> {{ game.platform }}</p>
+                        <p><strong>Année :</strong> {{ game.releaseYear }}</p>
+                    </div>
                 </div>
             </div>
         {% else %}
@@ -21,11 +32,6 @@
         {% endfor %}
     </div>
 </div>
-
-
-<p>
-    <a href="{{ path('app_video_game_add') }}">Ajouter un jeu à la liste</a>
-</p>
 
 
 {% endblock %}

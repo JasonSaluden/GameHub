@@ -1,20 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AuthenticationController!{% endblock %}
+{% block title %}Connexion - GameHubPro{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<!-- Import Bootstrap (si non déjà fait dans ton base.html.twig) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="card shadow-lg" style="width: 100%; max-width: 400px;">
+        <div class="card-header bg-primary text-white text-center">
+            <h3>Connexion</h3>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ path('app_login') }}">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Nom d'utilisateur</label>
+                    <input type="text" class="form-control" id="username" name="username" required autofocus>
+                </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/Users/salud/SymfonyProjects/GameHubPro/src/Controller/AuthenticationController.php</code></li>
-        <li>Your template at <code>C:/Users/salud/SymfonyProjects/GameHubPro/templates/authentication/index.html.twig</code></li>
-    </ul>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+            </form>
+        </div>
+        <div class="card-footer text-center">
+            <small>Pas encore de compte ? <a href="{{ path('app_register') }}">S'inscrire</a></small>
+        </div>
+    </div>
 </div>
+
+<!-- Optionally add Bootstrap JS (if necessary) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}

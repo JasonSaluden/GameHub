@@ -7,6 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use App\Entity\Game;
+
+
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -107,5 +113,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+
+        #[ORM\ManyToMany(targetEntity: Game::class)]
+    private Collection $games;
+
+    public function __construct() {
+        $this->games = new ArrayCollection();
+    }
+
+    public function getGames(): Collection {
+        return $this->games;
+    }
+
+    public function addGame(Game $game): self {
+        if (!$this->games->contains($game)) {
+            $this->games->add($game);
+        }
+        return $this;
+    }
+
+    public function removeGame(Game $game): self {
+        $this->games->removeElement($game);
+        return $this;
     }
 }

@@ -22,6 +22,14 @@ class Game
     #[ORM\Column(type: 'string')]
     private ?string $imageFileName = null;
 
+    #[ORM\Column(length: 50)]
+    private ?string $platform = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $releaseYear = null;
+
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +68,28 @@ class Game
     {
         $this->imageFileName = $imageFileName;
 
+        return $this;
+    }
+
+        public function getPlatform(): ?string
+    {
+        return $this->platform;
+    }
+
+    public function setPlatform(string $platform): self
+    {
+        $this->platform = $platform;
+        return $this;
+    }
+
+    public function getReleaseYear(): ?int
+    {
+        return $this->releaseYear;
+    }
+
+    public function setReleaseYear(?int $releaseYear): self
+    {
+        $this->releaseYear = $releaseYear;
         return $this;
     }
 }

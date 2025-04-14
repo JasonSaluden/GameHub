@@ -1,0 +1,22 @@
+.game-card {
+    transition: transform 0.3s;
+    cursor: pointer;
+    border-radius: 0.75rem;
+}
+.game-card:hover {
+    transform: scale(1.03);
+}
+.game-overlay {
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.game-card:hover .game-overlay {
+    opacity: 1;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00f2ff;
+    transition: 0.3s ease-in-out;
+}

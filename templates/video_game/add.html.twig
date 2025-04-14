@@ -1,18 +1,54 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Ajouter un jeu - GameHubPro{% endblock %}
 
 {% block body %}
+    <div class="container py-5 d-flex justify-content-center">
+        <div class="shadow p-4" style="width: 100%; max-width: 600px;">
+            <h2 class="text-center mb-4">Ajouter un nouveau jeu vidéo</h2>
 
-<h1>Ajouter un nouveau jeu vidéo</h1>
+            {{ form_start(form, { 'attr': {'enctype': 'multipart/form-data'} }) }}
 
-{{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.genre) }}
-    {{ form_row(form.save) }}
-{{ form_end(form) }}
+            <div class="mb-3">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.name) }}
+            </div>
 
-<p>
-    <a href="{{ path('app_video_game') }}">Retour à la liste des jeux</a>
-</p>
+            <div class="mb-3">
+                {{ form_label(form.genre) }}
+                {{ form_widget(form.genre, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.genre) }}
+            </div>
 
+            <div class="mb-3">
+                {{ form_label(form.platform) }}
+                {{ form_widget(form.platform, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.platform) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.releaseYear) }}
+                {{ form_widget(form.releaseYear, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.releaseYear) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.imageFile) }}
+                {{ form_widget(form.imageFile, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.imageFile) }}
+            </div>
+
+
+            <div class="text-center">
+<button type="submit" class="btn btn-success w-100">Ajouter</button>
+            </div>
+
+            {{ form_end(form) }}
+
+            <div class="mt-4 text-center">
+                <a href="{{ path('app_video_game') }}">Retour à la liste des jeux</a>
+            </div>
+    </div>
+</div>
 {% endblock %}
